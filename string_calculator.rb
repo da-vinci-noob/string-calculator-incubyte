@@ -3,15 +3,11 @@ class StringCalculator
     def add(num)
       return 0 if num.empty?
 
-      a, b = num.split(',')
-
-      return a.to_i if b.nil?
-
-      two_numbers(a, b)
+      add_multiple(num)
     end
 
-    def two_numbers(num_a, num_b)
-      num_a.to_i + num_b.to_i
+    def add_multiple(num)
+      num.split(',').map(&:to_i).sum
     end
   end
 end
