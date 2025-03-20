@@ -65,7 +65,8 @@ RSpec.describe StringCalculator do
       end
 
       it 'includes the negative numbers in the error message' do
-        todo
+        expect { described_class.add('-1,2,-3') }
+          .to raise_error(ArgumentError, 'Negative numbers are not allowed: ["-1", "-3"]')
       end
     end
 
