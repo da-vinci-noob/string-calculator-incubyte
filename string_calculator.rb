@@ -5,6 +5,7 @@ class StringCalculator
 
       nums = num.split(delimiter)
       validate_negatives(nums)
+      nums = ignore_numbers(nums)
       add_multiple(nums)
     end
 
@@ -21,6 +22,11 @@ class StringCalculator
       return unless negatives.any?
 
       raise ArgumentError, "Negative numbers are not allowed: #{negatives}"
+    end
+
+    # Currently, ignoring numbers greater than 1000
+    def ignore_numbers(nums)
+      nums.reject { |num| num.to_i > 1000 }
     end
   end
 end
