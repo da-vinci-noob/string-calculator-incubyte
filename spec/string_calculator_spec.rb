@@ -5,7 +5,7 @@ RSpec.describe StringCalculator do
 
   describe '#add' do
     it 'returns 0 for an empty string' do
-      todo
+      expect(described_class.add('')).to eq(0)
     end
 
     context 'when single number' do
