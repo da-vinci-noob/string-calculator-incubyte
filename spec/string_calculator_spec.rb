@@ -29,8 +29,12 @@ RSpec.describe StringCalculator do
     end
 
     context 'when multiple numbers' do
-      it 'returns the sum of multiple numbers' do
-        todo
+      it 'returns the sum of "1,2,3"' do
+        expect(described_class.add('1,2,3')).to eq(6)
+      end
+
+      it 'returns the sum of "1,2,3,4"' do
+        expect(described_class.add('1,2,3,4')).to eq(10)
       end
     end
 
