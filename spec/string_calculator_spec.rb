@@ -9,8 +9,12 @@ RSpec.describe StringCalculator do
     end
 
     context 'when single number' do
-      it 'returns the same number' do
-        todo
+      it 'returns 1 with "1"' do
+        expect(described_class.add('1')).to eq(1)
+      end
+
+      it 'returns 2 with "2"' do
+        expect(described_class.add('2')).to eq(2)
       end
     end
 
