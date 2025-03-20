@@ -76,9 +76,9 @@ RSpec.describe StringCalculator do
       end
     end
 
-    context 'when multiple custom delimiters' do
-      it 'returns the sum of numbers separated by multiple custom delimiters' do
-        todo
+    context 'when custom delimiters' do
+      it 'returns the sum of numbers separated by custom delimiter' do
+        expect(described_class.add("//;\n1;2")).to eq(3)
       end
     end
   end
