@@ -3,20 +3,21 @@ class StringCalculator
     def add(num)
       return 0 if num.empty?
 
-      add_multiple(num)
+      nums = num.split(delimiter)
+      validate_negatives(nums)
+      add_multiple(nums)
     end
 
-    def delimiter(num)
+    def delimiter
       /,|\n/
     end
 
-    def add_multiple(num)
-      validate_negatives(num)
-      num.split(delimiter(num)).sum(&:to_i)
+    def add_multiple(nums)
+      nums.sum(&:to_i)
     end
 
-    def validate_negatives(num)
-      return unless num.include?('-')
+    def validate_negatives(nums)
+      return unless nums.any? { |num| num.to_i.negative? }
 
       raise ArgumentError, 'Negative numbers are not allowed'
     end
