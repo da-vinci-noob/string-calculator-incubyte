@@ -48,9 +48,13 @@ RSpec.describe StringCalculator do
       end
     end
 
-    context 'when custom delimiter' do
-      it 'returns the sum of numbers separated by custom delimiter' do
-        todo
+    context 'when new line with comma delimiter' do
+      it 'returns the sum of 1, 2 and 3' do
+        expect(described_class.add("1\n2,3")).to eq(6)
+      end
+
+      it 'returns the sum of 2, 4 and 6' do
+        expect(described_class.add("2\n4,6")).to eq(12)
       end
     end
 
