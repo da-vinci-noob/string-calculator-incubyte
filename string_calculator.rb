@@ -3,13 +3,19 @@ class StringCalculator
     def add(num)
       return 0 if num.empty?
 
-      nums = num.split(delimiter)
+      nums = num.split(extract_delimiter(num))
       validate_negatives(nums)
       nums = ignore_numbers(nums)
       add_multiple(nums)
     end
 
-    def delimiter
+    def extract_delimiter(num)
+      return default_delimiter unless num.start_with?('//')
+
+      num[2]
+    end
+
+    def default_delimiter
       /,|\n/
     end
 
