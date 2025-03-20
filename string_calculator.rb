@@ -7,7 +7,7 @@ class StringCalculator
     end
 
     def add_multiple(num)
-      num.split(',').map(&:to_i).sum
+      num.split(',').sum(&:to_i)
     end
   end
 end
