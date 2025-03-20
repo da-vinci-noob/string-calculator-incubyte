@@ -72,7 +72,7 @@ RSpec.describe StringCalculator do
 
     context 'when ignore numbers greater than 1000' do
       it 'returns the sum of numbers greater than 1000' do
-        todo
+        expect(described_class.add('1,2,1001')).to eq(3)
       end
     end
 
