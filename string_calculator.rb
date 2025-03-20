@@ -17,9 +17,10 @@ class StringCalculator
     end
 
     def validate_negatives(nums)
-      return unless nums.any? { |num| num.to_i.negative? }
+      negatives = nums.select { |num| num.to_i.negative? }
+      return unless negatives.any?
 
-      raise ArgumentError, 'Negative numbers are not allowed'
+      raise ArgumentError, "Negative numbers are not allowed: #{negatives}"
     end
   end
 end
