@@ -6,8 +6,12 @@ class StringCalculator
       add_multiple(num)
     end
 
+    def delimiter(num)
+      num.include?("\n") ? "\n" : ','
+    end
+
     def add_multiple(num)
-      num.split(',').sum(&:to_i)
+      num.split(delimiter(num)).sum(&:to_i)
     end
   end
 end
