@@ -19,8 +19,12 @@ RSpec.describe StringCalculator do
     end
 
     context 'when 2 numbers' do
-      it 'returns the sum of 2 numbers' do
-        todo
+      it 'returns the sum of 1 and 2' do
+        expect(described_class.add('1,2')).to eq(3)
+      end
+
+      it 'returns the sum of 3 and 4' do
+        expect(described_class.add('3,4')).to eq(7)
       end
     end
 
