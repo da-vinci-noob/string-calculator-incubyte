@@ -80,6 +80,10 @@ RSpec.describe StringCalculator do
       it 'returns the sum of numbers separated by custom delimiter' do
         expect(described_class.add("//;\n1;2")).to eq(3)
       end
+
+      it 'returns the sum of numbers separated by multiple custom delimiters' do
+        expect(described_class.add("//*#%\n1*2%3")).to eq(6)
+      end
     end
   end
 end
