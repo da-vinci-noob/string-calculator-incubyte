@@ -7,7 +7,7 @@ class StringCalculator
     end
 
     def delimiter(num)
-      num.include?("\n") ? "\n" : ','
+      /,|\n/
     end
 
     def add_multiple(num)
