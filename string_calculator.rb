@@ -12,7 +12,8 @@ class StringCalculator
     def extract_delimiter(num)
       return default_delimiter unless num.start_with?('//')
 
-      num[2]
+      delimiter = num.match(%r{//(.+)\n})[1]
+      Regexp.new(Regexp.escape(delimiter).chars.join('|'))
     end
 
     def default_delimiter
