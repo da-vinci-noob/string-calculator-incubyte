@@ -1,11 +1,17 @@
 class StringCalculator
-  def self.add(num)
-    return 0 if num.empty?
+  class << self
+    def add(num)
+      return 0 if num.empty?
 
-    a, b = num.split(',')
+      a, b = num.split(',')
 
-    return a.to_i if b.nil?
+      return a.to_i if b.nil?
 
-    a.to_i + b.to_i
+      two_numbers(a, b)
+    end
+
+    def two_numbers(num_a, num_b)
+      num_a.to_i + num_b.to_i
+    end
   end
 end
