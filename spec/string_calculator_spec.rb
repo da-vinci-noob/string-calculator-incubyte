@@ -86,6 +86,14 @@ RSpec.describe StringCalculator do
       it 'returns the sum of numbers separated by multiple custom delimiters with more than once' do
         expect(described_class.add("//&***\n1***2**&5")).to eq(8)
       end
+
+      it 'returns the multiplies the numbers separated with * multiple custom delimiters' do
+        expect(described_class.add("//*\n1*2*2")).to eq(4)
+      end
+
+      it 'returns the 0 separated with * multiple custom delimiters' do
+        expect(described_class.add("//*\n1*0*2")).to eq(0)
+      end
     end
   end
 end
