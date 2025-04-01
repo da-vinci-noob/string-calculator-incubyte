@@ -94,6 +94,10 @@ RSpec.describe StringCalculator do
       it 'returns the 0 separated with * multiple custom delimiters' do
         expect(described_class.add("//*\n1*0*2")).to eq(0)
       end
+
+      it 'returns the sum of odd number with o as custom delimiters' do
+        expect(described_class.add("//o\n1o2o4o3")).to eq(4)
+      end
     end
   end
 end
