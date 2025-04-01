@@ -27,11 +27,6 @@ class StringCalculator
       )
     end
 
-    # Default delimiter is comma or new line
-    def default_delimiter
-      /,|\n/
-    end
-
     # Validate that there are no negative numbers
     def validate_negatives(numbers_array)
       negatives = numbers_array.select { |num| num.to_i.negative? }
@@ -41,7 +36,7 @@ class StringCalculator
     end
 
     # Filter out numbers greater than 1000
-    def filtered_numbers(numbers_array)
+    def filtered_numbers(numbers_array, delimiter)
       numbers_array.reject { |num| num.to_i > MAX_NUMBER }
     end
 
@@ -51,20 +46,35 @@ class StringCalculator
       # Find the index of first \n after custom delimiters
       idx = input.index("\n")
       # Then Split the rest of the string based on delimiter
-      input[idx + 1..-1].split(delimiter)
+      input[idx + 1..].split(delimiter)
     end
 
     # Calculate the sum of the numbers
     def calculation(delimiter, numbers_array)
+      # puts delimiter
       if delimiter == '*'
-        num = 1
-        filtered_numbers(numbers_array).each do |n|
-          num *= n.to_i
-        end
-        num
+        multiplication_of_num(numbers_array, delimiter)
+      elsif delimiter == 'o'
+        odd_number_sum(numbers_array, delimiter)
       else
-        filtered_numbers(numbers_array).sum(&:to_i)
+        filtered_numbers(numbers_array, delimiter).sum(&:to_i)
       end
+    end
+
+    def multiplication_of_num(numbers_array, delimiter)
+      num = 1
+      filtered_numbers(numbers_array, delimiter).each do |n|
+        num *= n.to_i
+      end
+      num
+    end
+
+    def odd_number_sum(numbers_array, delimiter)
+      num = 0
+      filtered_numbers(numbers_array, delimiter).each do |n|
+        num += n.to_i if n.to_i.odd?
+      end
+      num
     end
   end
 end
