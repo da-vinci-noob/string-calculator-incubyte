@@ -62,19 +62,11 @@ class StringCalculator
     end
 
     def multiplication_of_num(numbers_array, delimiter)
-      num = 1
-      filtered_numbers(numbers_array, delimiter).each do |n|
-        num *= n.to_i
-      end
-      num
+      filtered_numbers(numbers_array, delimiter).inject(1) { |res, n| res * n.to_i }
     end
 
     def odd_number_sum(numbers_array, delimiter)
-      num = 0
-      filtered_numbers(numbers_array, delimiter).each do |n|
-        num += n.to_i if n.to_i.odd?
-      end
-      num
+      filtered_numbers(numbers_array, delimiter).inject(0) { |res, n| n.to_i.odd? ? res + n.to_i : res }
     end
   end
 end
