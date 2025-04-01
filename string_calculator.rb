@@ -8,7 +8,7 @@ class StringCalculator
       return 0 if input.empty?
 
       delimiter = extract_delimiter(input)
-      numbers_array = split_numbers(input, delimiter)
+      numbers_array = parse_numbers(input, delimiter)
       validate_negatives(numbers_array)
       calculation(delimiter, numbers_array)
     end
@@ -29,44 +29,46 @@ class StringCalculator
 
     # Validate that there are no negative numbers
     def validate_negatives(numbers_array)
-      negatives = numbers_array.select { |num| num.to_i.negative? }
+      negatives = numbers_array.select(&:negative?)
       return unless negatives.any?
 
       raise ArgumentError, "Negative numbers are not allowed: #{negatives}"
     end
 
     # Filter out numbers greater than 1000
-    def filtered_numbers(numbers_array, delimiter)
-      numbers_array.reject { |num| num.to_i > MAX_NUMBER }
+    def filtered_numbers(numbers_array)
+      numbers_array.reject { |num| num > MAX_NUMBER }
     end
 
-    def split_numbers(input, delimiter)
-      return input.split(delimiter) if delimiter == DEFAULT_DELIMITER
-
-      # Find the index of first \n after custom delimiters
-      idx = input.index("\n")
-      # Then Split the rest of the string based on delimiter
-      input[idx + 1..].split(delimiter)
+    def parse_numbers(input, delimiter)
+      numbers = if delimiter == DEFAULT_DELIMITER
+        input.split(delimiter)
+      else
+        # Find the index of first \n after custom delimiters
+        idx = input.index("\n")
+        # Then Split the rest of the string based on delimiter
+        input[idx + 1..].split(delimiter)
+      end
+      numbers.map(&:to_i)
     end
 
     # Calculate the sum of the numbers
     def calculation(delimiter, numbers_array)
-      # puts delimiter
       if delimiter == '*'
-        multiplication_of_num(numbers_array, delimiter)
+        multiplication_of_num(numbers_array)
       elsif delimiter == 'o'
-        odd_number_sum(numbers_array, delimiter)
+        odd_number_sum(numbers_array)
       else
-        filtered_numbers(numbers_array, delimiter).sum(&:to_i)
+        filtered_numbers(numbers_array).sum
       end
     end
 
-    def multiplication_of_num(numbers_array, delimiter)
-      filtered_numbers(numbers_array, delimiter).inject(1) { |res, n| res * n.to_i }
+    def multiplication_of_num(numbers_array)
+      filtered_numbers(numbers_array).inject(1) { |res, n| res * n }
     end
 
-    def odd_number_sum(numbers_array, delimiter)
-      filtered_numbers(numbers_array, delimiter).inject(0) { |res, n| n.to_i.odd? ? res + n.to_i : res }
+    def odd_number_sum(numbers_array)
+      filtered_numbers(numbers_array).inject(0) { |res, n| n.odd? ? res + n : res }
     end
   end
 end
